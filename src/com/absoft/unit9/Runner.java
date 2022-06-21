@@ -4,54 +4,60 @@ import com.absoft.unit9.beans.Circle;
 import com.absoft.unit9.beans.Rectangle;
 import com.absoft.unit9.beans.Shape;
 import com.absoft.unit9.beans.Square;
+import com.absoft.unit9.exceptions.MyInvalidArgumentException;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLClientInfoException;
 
 public class Runner {
 
-    public static void main(String[] args) throws ClassNotFoundException,
-            NoSuchMethodException, InvocationTargetException,
-            InstantiationException, IllegalAccessException {
+    //checked
+    //un-checked
+    public static void main(String[] args) throws MyInvalidArgumentException{
+        try {
+            System.out.println("hello from try 1");
+            var rectangle = new Rectangle(12, 5);
+            System.out.println("hello from try 2");
 
-
-        var circleClass = Circle.class;
-        circleClass.getMethods()[1].getModifiers();
-
-        System.out.println(circleClass.getName());
-        System.out.println(circleClass.getSimpleName());
-
-        var annotations = circleClass.getAnnotations();
-        for (var annotation: annotations) {
-            System.out.println(annotation.annotationType());
+        } catch (IllegalArgumentException | ArithmeticException exception) {
+            System.out.println("GOT EXCEPTION! IllegalArgumentException");
+            exception.printStackTrace(System.out);
+        } catch (MyInvalidArgumentException exception) {
+            System.out.println("GOT EXCEPTION! generic Exception");
+            exception.printStackTrace(System.out);
+        } finally {
+            System.out.println("Hello from finally");
         }
 
-        System.out.println("=============================");
-        printPerimeter(new Square(10));
-        printPerimeter(new Rectangle(10, 11));
+        System.out.println("Hello world");
 
 
-        System.out.println("=============================");
-
-        Class<?> aClass = Class.forName(args[0]);
-        var shape =
-                (Shape) aClass.getDeclaredConstructor(double.class)
-                        .newInstance(10.0);
-
-        printPerimeter(shape);
-
-    }
-
-
-    private static void printPerimeter(Shape shape) {
-        Class<? extends Shape> aClass = shape.getClass();
-        var className = aClass.getSimpleName();
-
-        var annotation = aClass.getAnnotation(Deprecated.class);
-        if (annotation != null) {
-            System.out.println(className + " has been deprecated.");
-        } else {
-            System.out.println("perimeter of " + className + " is: " + shape.getPerimeter());
+        FileReader reader = null;
+        try {
+            reader = new FileReader("myfile.txt");
+        } catch (IOException e) {
+            ///
         }
+        finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace(System.out);
+            }
+        }
+
+        try(var reader1 = new FileReader("file.txt")) {
+            reader1.read();////
+
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+
 
     }
 }
