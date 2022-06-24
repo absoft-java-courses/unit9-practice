@@ -1,0 +1,12 @@
+HOMEWORK
+
+Go to the com.absoft.unit9homework.Runner to the run method. Execute this class and pay attention on the output.
+You might see output like "Unfortunately you still have 10 error(s) =c".
+
+Pay attention on methods like callTask1, callTask2 and callTask3. These methods have some 'validations' and comments what you have to do.
+Do the tasks from comments. If everything is OK then you don't have the following output: "Congads! you don't have any errors.".
+
+Also, you can find some optional task Card and BankAccount classes.
+
+FYI:
+https://www.javamadesoeasy.com/2015/05/exception-handling-exception-hierarchy.html
