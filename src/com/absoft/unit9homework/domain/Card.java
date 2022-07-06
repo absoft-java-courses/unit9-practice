@@ -8,7 +8,7 @@ public class Card {
         // TODO: 1) Add validation that fullName is not null
         // TODO: 2) Add validation that cardNumber is non-null
         // throw NullPointerException if validation fails
-        // TODO: Optional: Validate that cardNumber contain exactly 8 digits. And throw some unchecked exception if it invalid
+        // TODO: Optional: Validate that cardNumber contain exactly 16 digits. And throw some unchecked exception if it invalid
         this.fullName = fullName;
         this.cardNumber = cardNumber;
     }

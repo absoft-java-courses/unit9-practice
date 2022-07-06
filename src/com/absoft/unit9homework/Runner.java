@@ -46,11 +46,11 @@ public class Runner {
         var money = new Money(100500, Currency.UAH);
         var card = new Card("Ab Softer", "1234567812345678");
         hasToThrowException("BankAccount has to have null check on all fields",
-                () -> new BankAccount(null, "UA123", card));
+                () -> new BankAccount(null, "UA4564567891234", card));
         hasToThrowException("BankAccount has to have null check on all fields",
                 () -> new BankAccount(money, null, card));
         hasToThrowException("BankAccount has to have null check on all fields",
-                () -> new BankAccount(money, "UA123", null));
+                () -> new BankAccount(money, "UA4564567891234", null));
     }
 
     // TODO: Fix NotEnoughMoneyException, it has to be exception
@@ -58,17 +58,17 @@ public class Runner {
     private void callTask2() {
         var aliceMoney = new Money(100, Currency.UAH);
         var aliceCard = new Card("Alice Cooper", "1234567891234567");
-        var aliceAccount = new BankAccount(aliceMoney, "UA123", aliceCard);
+        var aliceAccount = new BankAccount(aliceMoney, "UA4564567891234", aliceCard);
 
         var bobMoney = new Money(200, Currency.UAH);
-        var bobCard = new Card("Bob Martin", "987654321098765432");
-        var bobAccount = new BankAccount(bobMoney, "UA456", bobCard);
+        var bobCard = new Card("Bob Martin", "9876543210987654");
+        var bobAccount = new BankAccount(bobMoney, "UA4564567891234", bobCard);
 
 
-       hasToThrowException("Alice hasn't be allowed to transfer more money than she has.",
-               () -> paymentService.transfer(aliceAccount, bobAccount, new Money(101, Currency.UAH)));
-       hasToThrowException("Bob hasn't be allowed to transfer more money than he has.",
-               () -> paymentService.transfer(bobAccount, aliceAccount, new Money(201, Currency.UAH)));
+        hasToThrowException("Alice hasn't be allowed to transfer more money than she has.",
+                () -> paymentService.transfer(aliceAccount, bobAccount, new Money(101, Currency.UAH)));
+        hasToThrowException("Bob hasn't be allowed to transfer more money than he has.",
+                () -> paymentService.transfer(bobAccount, aliceAccount, new Money(201, Currency.UAH)));
 
         hasNotThrowException("Alice has be allowed to transfer money she has.",
                 () -> paymentService.transfer(aliceAccount, bobAccount, new Money(100, Currency.UAH)));
@@ -82,15 +82,15 @@ public class Runner {
     private void callTask3() {
         var aliceMoney = new Money(100, Currency.UAH);
         var aliceCard = new Card("Alice Cooper", "1234567891234567");
-        var aliceAccount = new BankAccount(aliceMoney, "UA123", aliceCard);
+        var aliceAccount = new BankAccount(aliceMoney, "UA1234567891230", aliceCard);
 
         var bobMoney = new Money(200, Currency.EUR);
-        var bobCard = new Card("Bob Martin", "987654321098765432");
-        var bobAccount = new BankAccount(bobMoney, "UA456", bobCard);
+        var bobCard = new Card("Bob Martin", "9876543210987654");
+        var bobAccount = new BankAccount(bobMoney, "UA4564567891234", bobCard);
 
         var karlMoney = new Money(300, Currency.UAH);
         var karlCard = new Card("Karl Gustaf", "5555444433332222");
-        var karlAccount = new BankAccount(karlMoney, "UA456", karlCard);
+        var karlAccount = new BankAccount(karlMoney, "UA4564567891230", karlCard);
 
 
         hasToThrowException("Alice hasn't be allowed to transfer money with invalid currency.",
@@ -102,7 +102,7 @@ public class Runner {
 
 
         hasNotThrowException("Alice has be allowed to transfer money with valid currencies.",
-                () -> paymentService.transfer(aliceAccount, bobAccount, new Money(50, Currency.UAH)));
+                () -> paymentService.transfer(aliceAccount, karlAccount, new Money(50, Currency.UAH)));
     }
 
 
